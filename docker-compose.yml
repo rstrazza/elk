@@ -1,0 +1,41 @@
+cadvisor:
+  image: google/cadvisor:latest
+  volumes:
+    - /:/rootfs:ro
+    - /var/run:/var/run:rw
+    - /sys:/sys:ro
+    - /var/lib/docker/:/var/lib/docker:ro
+  ports:
+    - "8080:8080"
+  environment:
+    - "LOGSPOUT=ignore"
+elasticsearch:
+  image: elasticsearch:latest
+  command: elasticsearch -Des.network.host=0.0.0.0
+  ports:
+    - "9200:9200"
+    - "9300:9300"
+  environment:
+    - "LOGSPOUT=ignore"
+logstash:
+  image: logstash:latest
+  command: logstash -f /etc/logstash/conf.d/logstash.conf
+  volumes:
+    - ./logstash/config:/etc/logstash/conf.d
+  ports:
+    - "5000:5000"
+  links:
+    - elasticsearch
+  environment:
+    - "LOGSPOUT=ignore"
+kibana:
+  build: kibana/
+  volumes:
+    - ./kibana/config/kibana.yml:/opt/kibana/config/kibana.yml
+  ports:
+    - "5601:5601"
+  links:
+    - elasticsearch
+  environment:
+    - "LOGSPOUT=ignore"
+
