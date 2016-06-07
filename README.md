@@ -20,3 +20,5 @@ To explore the sample visualizations and dashboard:
 1. Kibana -> Settings -> Object
 2. Click on Import button
 3. Select kibana-ui-config.json from elk/resources folder
+
+This is a handy tool when building logstash filters: https://grokdebug.herokuapp.com
