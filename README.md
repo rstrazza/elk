@@ -2,7 +2,7 @@
 
 This is a simple project to explore the ELK stack and logspout capabilities.
 
-*logspout is not an ideal solution for production workloads, good alternatives would be fluentd and beats platform*
+**logspout is not an ideal solution for production workloads, good alternatives would be fluentd and beats platform**
 
 Pre-req: docker, docker compose
 
